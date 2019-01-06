@@ -93,7 +93,7 @@ client.on("message", async message => {
       level = await db.fetch(`level_${user.id}`);
       let embed = new Discord.RichEmbed()
       .setTitle("LEVEL UP")
-      .setDescription(`<@${message.author.id}> upou para o level ${level+1}.`)
+      .setDescription(`<@${message.author.id}> upou para o level ${level}.`)
       .setFooter(message.author.tag, message.author.avatarURL)
       .setTimestamp(Date.now());
       message.channel.send(embed);
