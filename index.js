@@ -55,11 +55,16 @@ client.on("message", async message => {
 	const command = args.shift().toLowerCase();
   
   try {
-    
+    const cooldown1 = require("./cooldown1.js"); 	  
+     if(cooldown1.is(message.author.id)) return message.channel.send(`**${message.author.username}**, o cooldown para uso é de **4** segundos! Espera mais!`);	  
     let commands = require(`./commands/${command}.js`);
     let cmd = "./commands/"+command;
     delete require.cache[require.resolve(`${cmd}`)];
     await commands.run(client, message, args).then(message.delete());
+    cooldown1.add(message.author.id);
+    setTimeout(() => {
+     cooldown1.remove(message.author.id);	    
+    }, 4000);
   } catch (e) {
     console.log(e);
   }
